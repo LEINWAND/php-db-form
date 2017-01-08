@@ -1,4 +1,4 @@
-<?php # @author iosif miclaus
+<?php
 
 // connect to database
 
