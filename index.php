@@ -23,7 +23,7 @@ $data = ['some@email.com', 'office@email.org'];
     />
     <input 
       type="submit"
-      name="save"
+      name="save_email"
       value="Save"
      />
   </form>
