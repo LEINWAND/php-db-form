@@ -33,7 +33,7 @@ function add_email($address) {
     // set the PDO error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   } catch(PDOException $e) {
-    show_index('mysql connection failed:' . $e->getMessage());
+    show_index('mysql connection failed: ' . $e->getMessage());
   }
 
   // insert into database
