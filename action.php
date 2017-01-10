@@ -5,7 +5,9 @@ $post_action = isset($_POST['action']) && ! empty($_POST['action']) ? $_POST['ac
 if ( ! is_null($post_action)) {
   switch ($post_action) {
     case 'add':
-      $address = isset($_POST['email']) && ! empty($_POST['email']) ? $_POST['email'] : null;
+      $address = isset($_POST['email']) ? trim($_POST['email']) : '';
+      $address = ! empty($address) ? $address : null;
+      
       if ( ! is_null($address)) {
         add_email($address);
       } else {
