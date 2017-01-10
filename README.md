@@ -10,7 +10,7 @@ PHP example demonstrating how to post form data into a MySQL database and displa
   * PDO extension enabled
 * MySQL ~v5.6+
 
-**NOTE**: These are the version the example has been tested under.
+**NOTE**: These are the versions the example has been tested under.
 
 ## Setup
 
@@ -20,14 +20,14 @@ PHP example demonstrating how to post form data into a MySQL database and displa
 ## How it works ?
 
 This is easy. The `index.php` connects to the database and loads all emails within the table `emails` and displays them.
-Additionally there is a input field, where new emails can be appended to the `emails` table.
+Additionally, there is an input field, where new emails can be appended to the `emails` table.
 
 When a new email added, the form is submitted to `actions.php` where the action `add` is mapped to connect to the database and insert a new email in the `emails` table.
 If an error occurs, then the script redirects back to `index.php` with an `error` GET parameter, containing an error message.
 
 ## Troubleshooting
 
-If you are having any troubles, create an issue here on GitHub.
+If you are having any troubles, please create an issue here on GitHub.
 
 ## Licence
 
