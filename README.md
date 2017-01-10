@@ -10,7 +10,7 @@ PHP example demonstrating how to post form data into a MySQL database and displa
   * PDO extension enabled
 * MySQL ~v5.6+
 
-**NOTE**: These are the versions the example has been tested under.
+**NOTE**: These are the versions the example has been tested with.
 
 ## Setup
 
