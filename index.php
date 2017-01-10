@@ -11,7 +11,7 @@ try {
   // set the PDO error mode to exception
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
-  echo '<p style="color:red">mysql connection failed:' . $e->getMessage() . '</p>';
+  echo '<p style="color:red">mysql connection failed: ' . $e->getMessage() . '</p>';
   echo '<p>try to refresh</p>';
 }
 
