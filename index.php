@@ -2,6 +2,8 @@
 
 require_once 'config.php';
 
+$error = isset($_GET['error']) && ! empty($_GET['error']) ? $_GET['error'] : null;
+
 // connect to mysql database
 try {
   $dns = 'mysql:host=' . HOST . ';dbname=' . DB;
@@ -19,8 +21,6 @@ $stmt->execute();
 
 $emails = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$error = isset($_GET['error']) && ! empty($_GET['error']) ? $_GET['error'] : null;
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,8 +34,8 @@ $error = isset($_GET['error']) && ! empty($_GET['error']) ? $_GET['error'] : nul
       border: 2px solid #222;
       border-radius: 2px;
     }
-
-    .DBForm {
+    
+    .DBForm { 
       padding: 1rem;
     }
     .DBForm .input {
