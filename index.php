@@ -34,8 +34,8 @@ $emails = $stmt->fetchAll(PDO::FETCH_ASSOC);
       border: 2px solid #222;
       border-radius: 2px;
     }
-    
-    .DBForm { 
+
+    .DBForm {
       padding: 1rem;
     }
     .DBForm .input {
@@ -74,7 +74,7 @@ $emails = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </form>
 
   <div class="Error">
-    <?php echo 'error: ' . $error; ?>
+    <?php if ( ! is_null($error)) echo 'error: ' . $error; ?>
   </div>
 
   <h2>Email addresses</h2>
