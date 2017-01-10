@@ -2,7 +2,7 @@
 
 PHP example demonstrating how to post form data into a MySQL database and display it.
 
-**NOTE**: This is only one of many methods one may want to do this. Please research further to see if this example suits your needs.
+**NOTE**: This is only one of many methods one may want to architect this functionality. Please research further to see if this example fully suits your needs.
 
 ## Requirements
 
