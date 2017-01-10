@@ -17,7 +17,7 @@ if ( ! is_null($post_action)) {
       break;
   }
 } else {
-  show_index();
+  show_index('no action triggered !');
 }
 
 
