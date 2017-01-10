@@ -1,10 +1,23 @@
 <?php
 
-// connect to database
+require_once 'config.php';
+
+// connect to mysql database
+try {
+  $dns = 'mysql:host=' . HOST . ';dbname=' . DB;
+  $pdo = new PDO($dns, USER, PASS);
+  // set the PDO error mode to exception
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+  echo '<p style="color:red">mysql connection failed:' . $e->getMessage() . '</p>';
+  echo '<p>try to refresh</p>';
+}
 
 // select data from database
+$stmt = $pdo->prepare('SELECT * from emails ORDER BY created_at DESC');
+$stmt->execute();
 
-$data = ['some@email.com', 'office@email.org'];
+$emails = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $error = isset($_GET['error']) && ! empty($_GET['error']) ? $_GET['error'] : null;
 
@@ -16,17 +29,22 @@ $error = isset($_GET['error']) && ! empty($_GET['error']) ? $_GET['error'] : nul
   <title>Database Form</title>
 
   <style>
-    .DBForm {
+    .DBForm,
+    .Fields {
       border: 2px solid #222;
       border-radius: 2px;
+    }
+
+    .DBForm {
       padding: 1rem;
     }
     .DBForm .input {
       width: 222px;
     }
-    .DBForm .error {
+
+    .Error {
       color: tomato;
-      padding-top: 0.4rem;
+      margin-top: 0.6rem;
     }
 
     .Fields .field {
@@ -50,20 +68,22 @@ $error = isset($_GET['error']) && ! empty($_GET['error']) ? $_GET['error'] : nul
     />
     <input
       type="submit"
-      name="add_email"
+      name="action"
       value="add"
      />
-     <div class="error">
-       <?php echo $error; ?>
-     </div>
   </form>
+
+  <div class="Error">
+    <?php echo 'error: ' . $error; ?>
+  </div>
 
   <h2>Email addresses</h2>
   <div class="Fields">
     <?php
-      foreach ($data as $key => $email) {
+      foreach ($emails as $key => $email) {
         ?><div class="field"><?php
-          echo $key . ' – ' . $email;
+          $created_date = date('d.m.Y', $email['created_at']);
+          echo $created_date . ' – ' . $email['address'];
         ?></div><?php
       }
     ?>

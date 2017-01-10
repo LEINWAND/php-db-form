@@ -4,7 +4,7 @@ $post_action = isset($_POST['action']) && ! empty($_POST['action']) ? $_POST['ac
 
 if ( ! is_null($post_action)) {
   switch ($post_action) {
-    case 'add_email':
+    case 'add':
       $address = isset($_POST['email']) && ! empty($_POST['email']) ? $_POST['email'] : null;
       if ( ! is_null($address)) {
         add_email($address);
@@ -13,7 +13,7 @@ if ( ! is_null($post_action)) {
       }
       break;
     default:
-      show_index();
+      show_index('unknown action');
       break;
   }
 } else {
@@ -23,22 +23,33 @@ if ( ! is_null($post_action)) {
 
 /// functions
 
-function add_email() {
-  // connect to database (NOTE: configure as needed)
-  $host = 'localhost';
-  $db = 'php-db-form';
-  $user = 'root';
-  $pass = 'root';
+function add_email($address) {
+  require_once 'config.php';
 
-  $pdo = new PDO("pgsql:host=$host;port=8889;dbname=$db;user=$user;password=$pass");
+  // connect to mysql database
+  try {
+    $dns = 'mysql:host=' . HOST . ';dbname=' . DB;
+    $pdo = new PDO($dns, USER, PASS);
+    // set the PDO error mode to exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  } catch(PDOException $e) {
+    show_index('mysql connection failed:' . $e->getMessage());
+  }
 
+  // insert into database
+  $timestamp = time();
   $stmt = $pdo->prepare('INSERT INTO emails (address, created_at) VALUES (:address, :created_at)');
-  // $stmt->bindParam(':address', );
+  $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+  $stmt->bindParam(':created_at', $timestamp, PDO::PARAM_INT);
+  $inserted = $stmt->execute();
 
-  // create prepared statement, save to db
-
-  show_index();
+  if ($inserted) {
+    show_index();
+  } else {
+    show_index('something went wrong, please try again!');
+  }
 }
+
 
 function show_index($msg = null) {
   if ( is_null($msg)) {
