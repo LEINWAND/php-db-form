@@ -22,7 +22,7 @@ PHP example demonstrating how to post form data into a MySQL database and displa
 This is easy. The `index.php` connects to the database and loads all emails within the table `emails` and displays them.
 Additionally, there is an input field, where new emails can be appended to the `emails` table.
 
-When a new email added, the form is submitted to `actions.php` where the action `add` is mapped to connect to the database and insert a new email in the `emails` table.
+When a new email is added, the form is submitted to `actions.php` where the action `add` is mapped to connect to the database and insert a new email in the `emails` table.
 If an error occurs, then the script redirects back to `index.php` with an `error` GET parameter, containing an error message.
 
 ## Troubleshooting
